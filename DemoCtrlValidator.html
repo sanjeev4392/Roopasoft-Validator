@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Demo CtrlValidator</title>
+<script type="text/javascript" src="jquery-2.0.3-min.js"></script>
+<script type="text/javascript" src="RoopasoftValidator.min.js"></script>
+<script>
+function AlertMessage()
+{
+if($("#txtRequired").attr("IsValid") == "false" || $("#txtNumber").attr("IsValid") == "false" || $("#txtEmail").attr("IsValid") == "false")
+return false;
+alert("Here's the message");
+$("#txtEmail").after("<span>as this is not required field the message gets populated.</span>")
+}
+
+$(document).ready(function(){
+CustomValidator.CtrlValidator({CtrlId: "txtRequired", IsReq: true});
+CustomValidator.CtrlValidator({CtrlId: "txtNumber", IsReq: true, IsNumber: true, Condition: "=", Size: 10});
+CustomValidator.CtrlValidator({CtrlId:"txtEmail", IsEmail: true});
+CustomValidator.BtnValidator({BtnId: "btnValidate", CtrlId: "txtBtnValid", IsReq: true, IsNumber: true});
+});
+</script>
+
+</head>
+<body>
+The text box here is set to be validated as required field.<br/>
+<input type="text" id="txtRequired" /><br/><br/><br/>
+
+The text box here is set to be validated as Required Number field and number of characters to be equal to 10.<br/>
+<input type="text" id="txtNumber" /><br/><br/><br/>
+
+The Textbox here is set to be validated as an Email address field.<br/>
+<input type="text" id="txtEmail" /><br/><br/><br/>
+
+
+The textbox below will be validated on submit button click as a required number field.<br/>
+<input type="text" id="txtBtnValid" /><br/><input type="button" id="btnValidate" value="Submit" onclick="return AlertMessage()"/> this button alerts a message which will only be populated if all the validations are clear.<br/><br/>
+</body>
+</html>
