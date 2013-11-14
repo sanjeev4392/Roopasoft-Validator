@@ -1,0 +1,66 @@
+Instructions to use the plugin:
+
+First You need to add jquery to your page and then add the plugin. Order should be followed, 1st Jquery File   2nd The plugin.
+
+The class you need to call is "CustomValidator" and it's functions.
+CustomValidator has two functions: "CtrlValidator" and "BtnValidator".
+
+CtrlValidator can be used to validate the provided fields "on focus out" or "on blur".
+
+BtnValidator can be used to validate the fields "on button click".
+
+Validating fields using CtrlValidator:
+
+you have to call CtrlValidator as follows:
+CustomValidator.CtrlValidator({    --attributes--    });
+
+attributes are:    CtrlId - type String,   IsReq - Boolean (False by default) ,  IsNumber - Boolean (False by default),  IsEmail - Boolean(False by default)
+		Condition - String (either "<" or ">" or "=") ,  Size - integer
+Examples:
+CustomValidator.CtrlValidator({CtrlId:"textbox1", IsReq: true});
+the above statement validates the textbox whose Id is "textbox1" to be a required field on blur.
+
+CustomValidator.CtrlValidator({CtrlId:"textbox1", IsEmail:true});
+the above statement validates the textbox whose Id is "textbox1" to be an Email Address on blur.
+
+CustomValidator.CtrlValidator({CtrlId:"textbox1", IsNumber:true});
+the above statement validates the textbox whose Id is "textbox1" to allow only numbers to the textbox on blur.
+
+CustomValidator.CtrlValidator({CtrlId:"textbox1", Condition:">", Size:10});
+While using condition or size, both of them should be used , you cant use any one at a time.
+the above statement validates the textbox whose Id is "textbox1" to hold a value greater than 10 characters on blur.
+
+Validating Fields using BtnValidator:
+You have to call BtnValidator as follows:
+CustomValidator.BtnValidator({   ---attributes---     });
+
+attributes are:  BtnId - type String, CtrlId - type string, IsReq - Boolean (False by default) ,  IsNumber - Boolean (False by default),  IsEmail - Boolean(False by default)
+		Condition - String (either "<" or ">" or "=") ,  Size - integer
+
+Examples:
+CustomValidator.BtnValidator({BtnId: "buttonSubmit", CtrlId: "textbox2", IsReq: true})
+the above statement validates the textbox with id textbox2 to be a required field on button click.
+
+While using BtnValidator BtnId attribute should be given, otherwise the plugin will not be able to find the button.
+
+
+
+Note:
+1)All the validation error messages will be shown just after the textboxes which is being validated.
+2)the form or the button click will not submit to codebehind untill all the provided textfields are valid enough.
+3)if you have not used all of your textboxes to be validated on button click, instead onblur then the form will be submitted to code behind unless you add following code to your button click function.
+Ex: you have validated one textbox with CtrlValidator and other with BtnValidator.
+then the form will be submitted even if the first is not valid. to stop this , you have to add following code to your button click function.
+
+if($("ID of the first textbox").attr("IsValid")=="false")
+{
+return false;
+} 
+
+by this the form will not submit until the first textbox has also been validated.
+If you have more textboxes that are not being validated by BtnValidator but by CtrlValidator, just add them to if condition.
+
+if($("ID of the first textbox").attr("IsValid")=="false" || $("ID of the next textbox").attr("IsValid")=="false" ||$("ID of the next textbox").attr("IsValid")=="false")
+{
+return false;
+}
