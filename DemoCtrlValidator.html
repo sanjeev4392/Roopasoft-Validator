@@ -2,14 +2,13 @@
 <head>
 <title>Demo CtrlValidator</title>
 <script type="text/javascript" src="jquery-2.0.3-min.js"></script>
-<script type="text/javascript" src="RoopasoftValidator.min.js"></script>
+<script type="text/javascript" src="RoopasoftValidator.js"></script>
 <script>
 function AlertMessage()
 {
 if($("#txtRequired").attr("IsValid") == "false" || $("#txtNumber").attr("IsValid") == "false" || $("#txtEmail").attr("IsValid") == "false")
 return false;
 alert("Here's the message");
-$("#txtEmail").after("<span>as this is not required field the message gets populated.</span>")
 }
 
 $(document).ready(function(){
